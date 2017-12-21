@@ -5,7 +5,7 @@
 /**
  *
  * @param image 图片对象 new Image()
- * @param Orientation 通过加载exif-js获取
+ * @param Orientation 通过加载exif-js获取，npm install exif-js /bower install exif-js 等等方式加载
  * @returns 返回图片旋转后的base64，可以直接将图片的src定义为此值
  */
 function getImgData(image,Orientation){
@@ -98,5 +98,25 @@ function rotateImg(img, direction,canvas) {
             break;
     }
 }
+
+
+/**
+ * 例子
+ */
+var src = 'abc.jpg';                                          //需传入图片地址
+var fileImg = new Image();
+fileImg.src = src;
+fileImg.onload = function () {
+    var Orientation;
+    EXIF.getData(fileImg, function () {
+        Orientation = EXIF.getTag(this, "Orientation");
+        var base64;                                            //需传出的图片地址
+        if('368'.indexOf(Orientation)>-1){
+            base64 = getImgData(fileImg, Orientation);
+        }else{
+            base64 = src;
+        }
+    });
+};
 
 
