@@ -38,7 +38,7 @@ function getImgData(image,Orientation){
             rotateImg(image,'right',canvas);
             break;
     }
-    base64 = canvas.toDataURL("image/jpeg");//这里处理一下base64编码头，以便php的 base64_decode可以解析，压缩一下图片，否则会413错误
+    base64 = canvas.toDataURL("image/jpeg");
     return base64;
 }
 
